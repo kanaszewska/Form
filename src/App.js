@@ -1,8 +1,8 @@
 import React from 'react';
-import Form from './Form';
+import LogIn from './LogIn';
 import { BrowserRouter as Router, Routes, NavLink, Route } from 'react-router-dom';
 import './App.css'
-import Registration from './Registration';
+import SignUp from './SignUp';
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
       </div>
       <section className='route'>
       <Routes>
-          <Route path="" element={<Form/>} />
-          <Route path="/registration" element={<Registration/>} />
+          <Route path="" element={<LogIn/>} />
+          <Route path="/registration" element={<SignUp/>} />
        </Routes>
       </section>
     </div>
