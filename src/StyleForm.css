@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
+.container {
+  display: flex;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  margin-top: 5rem;
+  max-width: 700px;
+  width: 100%;
+  height: auto;
+  border: 2px solid snow;
+  border-radius: 4px white ;
+  background-color: rgba(248, 251, 251, 0.45); 
+  font-family: 'Playfair Display', serif;
+  padding: 10px 30px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0.5rem;
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.3rem;
+  position: relative;
+}
+
+.details {
+  height: 16vh;
+  margin: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc( 50% - 20px);
+  float: left;
+}
+
+ input[type="text"],
+ input[type="email"],
+ input[type="password"] {
+  padding: 0 .5rem;
+  margin: .5rem 0;
+  height: 40px;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: .3rem;
+  background-color: white;
+ }
+
+  label {
+    font-size: 1.3rem;
+  }
+
+  .accept {
+    text-align: left;
+    font-size: 18px;
+    margin: 1px 5px;
+  }
+  
+  input[type="checkbox"] {
+    margin: .5rem;
+  }
+  
+  button {
+    margin: 1rem;
+    padding: 12px;
+    border: none;
+    background-color: rgba(50, 54, 57, 0.75);
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  button:hover {
+    background-color: rgba(25, 27, 28, 0.885);
+  }
+
+  p {
+    padding: 0.3rem 0;
+    font-size: 10px;
+    color: red;
+    background-color: rgb(255, 0, 0, 0.1);
+    margin: 4px 0;
+  }
