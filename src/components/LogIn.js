@@ -1,47 +1,47 @@
-import React, { useState } from 'react'
-import './Form.css'
+import React, { useState } from "react";
+import "../styles/Form.css"
 
 const Form = () => {
   const initialValue = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     accept: false,
-  }
+  };
 
-  const [formValues, setFormValues] = useState(initialValue)
-  const [formErrors, setFormErrors] = useState({})
-  const [isSubmit, setIsSubmit] = useState(false)
+  const [formValues, setFormValues] = useState(initialValue);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormValues({ ...formValues, [name]: value })
-  }
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
-    setFormErrors(validate(formValues))
-    setIsSubmit(true)
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
 
     if (Object.keys(validate(formValues)).length === 0 && isSubmit) {
-      alert('Log in is correct')
+      alert("Log in is correct");
     }
-    return
-  }
+    return;
+  };
 
   const validate = (values) => {
-    const errors = {}
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
+    const errors = {};
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     if (!values.email) {
-      errors.email = 'The email you entered is incorrect'
+      errors.email = "The email you entered is incorrect";
     } else if (!regexEmail.test(values.email)) {
-      errors.email = 'Please provide a valid email address.'
+      errors.email = "Please provide a valid email address.";
     }
     if (!values.password) {
-      errors.password = 'The password you entered is incorrect'
+      errors.password = "The password you entered is incorrect";
     }
-    return errors
-  }
+    return errors;
+  };
 
   return (
     <div className="container">
@@ -92,6 +92,6 @@ const Form = () => {
         </div>
       </form>
     </div>
-  )
-}
-export default Form
+  );
+};
+export default Form;

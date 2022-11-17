@@ -1,76 +1,76 @@
-import React, { useState } from 'react'
-import './Form.css'
+import React, { useState } from "react";
+import "../styles/Form.css"
 
 const Registration = () => {
   const initialValue = {
-    name: '',
-    surname: '',
-    address: '',
-    code: '',
-    city: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    surname: "",
+    address: "",
+    code: "",
+    city: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
     accept: false,
-  }
+  };
 
-  const [formValues, setFormValues] = useState(initialValue)
-  const [formErrors, setFormErrors] = useState({})
-  const [isSubmit, setIsSubmit] = useState(false)
+  const [formValues, setFormValues] = useState(initialValue);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormValues({ ...formValues, [name]: value })
-  }
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
-    setFormErrors(validate(formValues))
-    setIsSubmit(true)
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
 
     if (Object.keys(validate(formValues)).length === 0 && isSubmit) {
-      alert('Sign up is correct')
+      alert("Sign up is correct");
     }
-    return
-  }
+    return;
+  };
 
   const validate = (values) => {
-    const errors = {}
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
-    const regexCode = /(^\d{2}-\d{3}$)/
+    const errors = {};
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const regexCode = /(^\d{2}-\d{3}$)/;
 
     if (!values.name) {
-      errors.name = 'Please provide a name'
+      errors.name = "Please provide a name";
     }
     if (!values.surname) {
-      errors.surname = 'Please provide a surname'
+      errors.surname = "Please provide a surname";
     }
     if (!values.address) {
-      errors.address = 'Please provide your address'
+      errors.address = "Please provide your address";
     }
     if (!values.code) {
-      errors.code = 'Please provide your address'
+      errors.code = "Please provide your address";
     } else if (!regexCode.test(values.code)) {
-      errors.code = 'Please provide a valid ZIP code.'
+      errors.code = "Please provide a valid ZIP code.";
     }
     if (!values.city) {
-      errors.city = 'The city you entered is incorrect'
+      errors.city = "The city you entered is incorrect";
     }
     if (!values.email) {
-      errors.email = 'The email you entered is incorrect'
+      errors.email = "The email you entered is incorrect";
     } else if (!regexEmail.test(values.email)) {
-      errors.email = 'Please provide a valid email address.'
+      errors.email = "Please provide a valid email address.";
     }
     if (!values.password) {
-      errors.password = 'The password you entered is incorrect'
+      errors.password = "The password you entered is incorrect";
     }
     if (!values.confirmPassword) {
-      errors.confirmPassword = 'Please confirm your password'
+      errors.confirmPassword = "Please confirm your password";
     } else if (values.confirmPassword !== values.password) {
-      errors.confirmPassword = 'The confirm password you entered is incorrect'
+      errors.confirmPassword = "The confirm password you entered is incorrect";
     }
-    return errors
-  }
+    return errors;
+  };
 
   return (
     <div className="container">
@@ -191,7 +191,7 @@ const Registration = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Registration
+export default Registration;

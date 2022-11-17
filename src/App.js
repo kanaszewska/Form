@@ -1,5 +1,5 @@
 import React from 'react'
-import LogIn from './LogIn'
+import LogIn from './components/LogIn'
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,7 +7,7 @@ import {
   Route,
 } from 'react-router-dom'
 import './App.css'
-import SignUp from './SignUp'
+import SignUp from './components/SignUp'
 
 function App() {
   return (
