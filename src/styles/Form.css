@@ -53,12 +53,6 @@ h1 {
   label {
     font-size: 1.3rem;
   }
-
-  .accept {
-    text-align: left;
-    font-size: 18px;
-    margin: 1px 5px;
-  }
   
   input[type="checkbox"] {
     margin: .5rem;
@@ -68,7 +62,7 @@ h1 {
     margin: 1rem;
     padding: 12px;
     border: none;
-    background-color: rgba(50, 54, 57, 0.75);
+    background-color: black;
     border-radius: 5px;
     color: white;
     cursor: pointer;
@@ -76,7 +70,7 @@ h1 {
   }
 
   button:hover {
-    background-color: rgba(25, 27, 28, 0.885);
+    scale: 108%;
   }
 
   p {
@@ -85,4 +79,16 @@ h1 {
     color: red;
     background-color: rgb(255, 0, 0, 0.1);
     margin: 4px 0;
+  }
+
+  .account {
+    padding-top: 7rem;
+    text-align: center;
+  }
+
+  .account p{
+    color: black;
+    background-color: transparent;
+    font-size: 2.5rem;
+    text-transform: uppercase;
   }

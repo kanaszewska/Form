@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import "../styles/Form.css"
 
 const Form = () => {
@@ -12,6 +13,8 @@ const Form = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
+  const navigate = useNavigate()
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -23,7 +26,7 @@ const Form = () => {
     setIsSubmit(true);
 
     if (Object.keys(validate(formValues)).length === 0 && isSubmit) {
-      alert("Log in is correct");
+      navigate('/account')
     }
     return;
   };
@@ -70,18 +73,6 @@ const Form = () => {
             value={formValues.password}
           />
           <p>{formErrors.password}</p>
-        </div>
-        <div className="accept">
-          <label>
-            <input
-              className="accept"
-              name="accept"
-              onChange={handleChange}
-              type="checkbox"
-              value={formValues.accept}
-            />
-            Keep me logged in
-          </label>
         </div>
         <div>
           <div className="button-cointainer">

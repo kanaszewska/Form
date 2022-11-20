@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Modal from "./Modal";
 import "../styles/Form.css"
 
 const Registration = () => {
@@ -11,17 +12,22 @@ const Registration = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    accept: false,
   };
 
   const [formValues, setFormValues] = useState(initialValue);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
+
+  const handleOnClick = () => {
+    setShow(false)
+    setFormValues(initialValue)
+  }
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +35,7 @@ const Registration = () => {
     setIsSubmit(true);
 
     if (Object.keys(validate(formValues)).length === 0 && isSubmit) {
-      alert("Sign up is correct");
+      setShow(true)
     }
     return;
   };
@@ -172,22 +178,14 @@ const Registration = () => {
           />
           <p>{formErrors.confirmPassword}</p>
         </div>
-        <div className="accept">
-          <label>
-            <input
-              className="accept"
-              name="accept"
-              onChange={handleChange}
-              type="checkbox"
-              value={formValues.accept}
-            />
-            Keep me logged in
-          </label>
-        </div>
         <div>
           <button className="button" type="submit" onClick={handleOnSubmit}>
             SIGN UP
           </button>
+          {show ? (
+          <Modal show={show} onClose={handleOnClick}>
+          </Modal>
+        ) : null}
         </div>
       </form>
     </div>

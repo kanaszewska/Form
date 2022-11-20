@@ -1,4 +1,5 @@
 import React from 'react'
+import Account from './components/Account'
 import LogIn from './components/LogIn'
 import {
   BrowserRouter as Router,
@@ -29,6 +30,7 @@ function App() {
           <Routes>
             <Route path="/Form" element={<LogIn />} />
             <Route path="/registration" element={<SignUp />} />
+            <Route path="/account" element={<Account />} />
           </Routes>
         </section>
       </div>
