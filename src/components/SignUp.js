@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
-import "../styles/Form.css"
+import { ModalCorrect, ModalWrong } from "./Modal";
+import "../styles/Form.css";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const initialValue = {
@@ -17,28 +19,52 @@ const Registration = () => {
   const [formValues, setFormValues] = useState(initialValue);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const [show, setShow] = useState(false);
+  const [showCorrect, setShowCorrect] = useState(false);
+  const [showWrong, setShowWrong] = useState(false);
+  const [cookies, setCookie] = useCookies();
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleOnClick = () => {
-    setShow(false)
-    setFormValues(initialValue)
-  }
+  const handleOnClickCorrect = () => {
+    setShowCorrect(false);
+    setFormValues(initialValue);
+    navigate("/Form");
+  };
+
+  const handleOnClickWrong = () => {
+    setShowWrong(false);
+  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
 
-    if (Object.keys(validate(formValues)).length === 0 && isSubmit) {
-      setShow(true)
+    if (Object.keys(validate(formValues)).length !== 0 && isSubmit) return;
+
+    let users = cookies.users;
+
+    if (findArrayElementByEmail(users, formValues.email)) {
+      setShowWrong(true);
+    } else {
+      setShowCorrect(true);
+      users.push(formValues);
+      setCookie("users", users);
     }
-    return;
   };
+
+  function findArrayElementByEmail(array, email) {
+    return array.find((element) => {
+      if (element.email === email) {
+        return true;
+      }
+    });
+  }
 
   const validate = (values) => {
     const errors = {};
@@ -182,10 +208,18 @@ const Registration = () => {
           <button className="button" type="submit" onClick={handleOnSubmit}>
             SIGN UP
           </button>
-          {show ? (
-          <Modal show={show} onClose={handleOnClick}>
-          </Modal>
-        ) : null}
+          {showCorrect ? (
+            <ModalCorrect
+              showCorrect={showCorrect}
+              onClose={handleOnClickCorrect}
+            ><p>Sign up is correct</p></ModalCorrect>
+          ) : null}
+          {showWrong ? (
+            <ModalWrong
+              showWrong={showWrong}
+              onClose={handleOnClickWrong}
+            ><p>We already have an account with this email. Please enter a new email!</p></ModalWrong>
+          ) : null}
         </div>
       </form>
     </div>

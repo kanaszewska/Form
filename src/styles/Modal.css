@@ -41,6 +41,17 @@
     font-size: 1.5rem;
 }
 
+.modal-title-wrong p {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    letter-spacing: 1px;
+    color: red;
+    background-color: white;
+    font-size: 1.5rem;
+}
+
 .modal-title p span {
     margin-right: 5px;
 }

@@ -3,8 +3,8 @@ import "../styles/Modal.css";
 
 import { FaCheckCircle } from "react-icons/fa";
 
-const Modal = (props) => {
-  if (!props.show) {
+export function ModalCorrect (props) {
+  if (!props.showCorrect) {
     return null;
   }
   return (
@@ -21,7 +21,7 @@ const Modal = (props) => {
           </h4>
         </div>
         <div className="modal-body">
-          <p>Sign up is correct</p>
+          {props.children}
         </div>
         <div className="modal-footer">
           <button className="modal-button" onClick={props.onClose}>
@@ -33,4 +33,33 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+
+export function ModalWrong (props) {
+  if (!props.showWrong) {
+    return null;
+  }
+  return (
+    <div className="modal" onClick={props.onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="model-header">
+          <h4 className="modal-title-wrong">
+            <p>
+              <span>
+                <FaCheckCircle />
+              </span>
+              Ooops!
+            </p>
+          </h4>
+        </div>
+        <div className="modal-body">
+          {props.children}
+        </div>
+        <div className="modal-footer">
+          <button className="modal-button" onClick={props.onClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};

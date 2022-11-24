@@ -1,23 +1,31 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom'
-import "../styles/Form.css"
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import "../styles/Form.css";
+import { ModalWrong } from "./Modal";
 
-const Form = () => {
+const LogIn = (props) => {
   const initialValue = {
     email: "",
     password: "",
-    accept: false,
   };
 
   const [formValues, setFormValues] = useState(initialValue);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [cookies, setCookie] = useCookies();
+  const [showWrong, setShowWrong] = useState(false);
+  const [wrongPassword, setWrongPassword] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleOnClickWrong = () => {
+    setShowWrong(false);
   };
 
   const handleOnSubmit = (e) => {
@@ -25,10 +33,45 @@ const Form = () => {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
 
-    if (Object.keys(validate(formValues)).length === 0 && isSubmit) {
-      navigate('/account')
+    if (Object.keys(validate(formValues)).length !== 0 && isSubmit) return;
+
+    let users = cookies.users;
+
+    if (
+      findArrayElementByEmail(users, formValues.email) &&
+      findArrayElementByPassword(users, formValues.password)
+    ) {
+      navigate("/account");
+      props.changeFlag(false);
+    } else if (
+      findArrayElementByEmail(users, formValues.email) &&
+      !findArrayElementByPassword(users, formValues.password)
+    ) {
+      setShowWrong(true);
+      setWrongPassword(false);
+    } else if (
+      !findArrayElementByEmail(users, formValues.email) &&
+      !findArrayElementByPassword(users, formValues.password)
+    ) {
+      setShowWrong(true);
+      setWrongPassword(true);
     }
-    return;
+  };
+
+  const findArrayElementByEmail = (array, email) => {
+    return array.find((element) => {
+      if (element.email === email && email !== "") {
+        return true;
+      }
+    });
+  };
+
+  const findArrayElementByPassword = (array, password) => {
+    return array.find((element) => {
+      if (element.password === password && password !== "") {
+        return true;
+      }
+    });
   };
 
   const validate = (values) => {
@@ -55,7 +98,7 @@ const Form = () => {
           <input
             className="emailInput"
             name="email"
-            placeholder="Enter your name"
+            placeholder="Enter your email"
             onChange={handleChange}
             type="email"
             value={formValues.email}
@@ -79,10 +122,19 @@ const Form = () => {
             <button className="button" type="submit" onClick={handleOnSubmit}>
               LOG IN
             </button>
+            {showWrong ? (
+              <ModalWrong showWrong={showWrong} onClose={handleOnClickWrong}>
+                {wrongPassword ? (
+                  <p>You must register!</p>
+                ) : (
+                  <p>Your password is wrong!</p>
+                )}
+              </ModalWrong>
+            ) : null}
           </div>
         </div>
       </form>
     </div>
   );
 };
-export default Form;
+export default LogIn;
