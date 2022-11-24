@@ -8,6 +8,7 @@ https://kanaszewska.github.io/Form/
 * JavaScript
 * React
 * React Router DOM
+* Web cookies
 
 
 
