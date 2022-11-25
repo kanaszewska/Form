@@ -39,19 +39,19 @@ const LogIn = (props) => {
 
     if (
       findArrayElementByEmail(users, formValues.email) &&
-      findArrayElementByPassword(users, formValues.password)
+      findArrayElementByPassword(users, formValues.email, formValues.password)
     ) {
       navigate("/account");
       props.changeFlag(false);
     } else if (
       findArrayElementByEmail(users, formValues.email) &&
-      !findArrayElementByPassword(users, formValues.password)
+      !findArrayElementByPassword(users, formValues.email, formValues.password)
     ) {
       setShowWrong(true);
       setWrongPassword(false);
     } else if (
       !findArrayElementByEmail(users, formValues.email) &&
-      !findArrayElementByPassword(users, formValues.password)
+      !findArrayElementByPassword(users, formValues.email, formValues.password)
     ) {
       setShowWrong(true);
       setWrongPassword(true);
@@ -66,9 +66,9 @@ const LogIn = (props) => {
     });
   };
 
-  const findArrayElementByPassword = (array, password) => {
+  const findArrayElementByPassword = (array,email, password) => {
     return array.find((element) => {
-      if (element.password === password && password !== "") {
+      if (element.email === email && element.password === password && password !== "") {
         return true;
       }
     });
