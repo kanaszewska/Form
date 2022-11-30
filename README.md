@@ -12,10 +12,13 @@ https://kanaszewska.github.io/Form/
 
 
 # Features
-* When client type is chosen it asks for:
-* Fully rensponsive on all devices
-* Validation of Pesel number and NIP
-* Form asks for full name, client type, Pesel/NIP number and a photo.
+* Form asks for all the data
+* Validation of ZIP code and email
+* All registration details stored in Web cookies and used during user login
+* Modal windows in case of correct or incorrect registration or login
+* I used fonts from Google Fonts
+* I used icons from React Icons
+* Responsive design
 
 
 # Screenshots
